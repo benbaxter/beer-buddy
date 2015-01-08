@@ -1,0 +1,23 @@
+
+.ninja {
+	display: none;
+}
+
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.face {
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  width: 48px;
+  margin: 16px; 
+}
+
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
