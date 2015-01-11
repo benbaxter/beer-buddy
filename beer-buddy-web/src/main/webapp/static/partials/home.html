@@ -4,13 +4,17 @@
 	<md-content>
 		
 		<md-tabs md-selected="selectedIndex">
-		    <md-tab ng-repeat="tab in tabs" md-on-select="announceSelected(tab)" 
-		    		md-on-deselect="announceDeselected(tab)"
+		    <md-tab ng-repeat="tab in tabs" md-on-select="selectType(tab)" 
+		    		md-on-deselect="deselectType(tab)"
 		    	ng-disabled="tab.disabled" label="{{tab.title}}">
-		    <div class="tab{{$index%4}}" layout="column">
+		    <div layout="column">
 		        
-		      
-		      <section>
+		      </div>
+		    </md-tab>
+		  </md-tabs>
+	
+	
+	<section>
 			<!-- <md-subheader class="md-primary">Beer</md-subheader> -->
 			<md-list>
 		      <md-item ng-repeat="beer in beers">
@@ -37,18 +41,14 @@
 		        </md-item-content>
 		      </md-item>
 		    </md-list>
-		    <md-button ng-click="nextPage();" ng-show="hasMore();"
+		    <md-button ng-click="loadMore();" ng-show="hasMore();"
 			        		class="md-fab md-primary face" aria-label="Load More">
 			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
 	            </md-icon>
 			 </md-button>
 		</section>
 		      
-		        
-		        
-		      </div>
-		    </md-tab>
-		  </md-tabs>
+	
 	
 	</md-content>
 

@@ -31,15 +31,18 @@ angular.module('rate-this-app')
 		var tabs = [
             { title: 'All'}
            ];
+		var types = [];
 		BeerService.getTypes(function(ts){
 			angular.forEach(ts, function(type) {
 				$scope.tabs.push({title: type});
+				types.push(type);
 			});
 		});
+		
           $scope.tabs = tabs;
           $scope.selectedIndex = 0;
-          $scope.announceSelected = announceSelected;
-          $scope.announceDeselected = announceDeselected;
+          $scope.selectType = selectType;
+          $scope.deselectType = deselectType;
           $scope.addTab = function (title, view) {
             view = view || title + " Content View";
             tabs.push({ title: title, content: view, disabled: false});
@@ -52,12 +55,36 @@ angular.module('rate-this-app')
               }
             }
           };
-          function announceDeselected(tab) {
-              $scope.farewell = 'Goodbye ' + tab.title + '!';
-            }
-            function announceSelected(tab) {
-              $scope.greeting = 'Hello ' + tab.title + '!';
-            }
+		 function selectType(tab) {
+			 $scope.page = -1;
+			 $scope.beers = [];
+			 if( types.indexOf(tab.title) > -1 ) {
+				 $scope.nextPageOfType(tab.title);
+				 $scope.loadMore = function() {
+					 $scope.nextPageOfType(tab.title);
+				}; 
+			 } else {
+				 $scope.nextPage();
+				 $scope.loadMore = function() {
+					$scope.nextPage();
+				};
+			 }
+		}
+		function deselectType(tab) {
+			$scope.greeting = 'Hello ' + tab.title + '!';
+		}
+		$scope.nextPageOfType = function(type) {
+			BeerService.getType(type, $scope.page + 1, function(page) {
+				$scope.beers = angular.copy(page.content, $scope.beers);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		}
+		
+		$scope.loadMore = function() {
+			$scope.nextPage();
+		};
 	}])
 
 ;
@@ -71,7 +98,7 @@ angular.module('rate-this-app')
 	
 	var BeerApi = $resource(baseUrl + '/:id');
 	
-	var Types = $resource(baseUrl + '/types');
+	var Types = $resource(baseUrl + '/types/:type');
 	
 	return {
 		getPage : function(page, callback) {
@@ -82,6 +109,9 @@ angular.module('rate-this-app')
 		}
 		, getTypes : function(callback) {
 			return Types.query(callback);
+		}
+		, getType : function(type, page, callback) {
+			return Types.get({type: type, page: page}, callback);
 		}
 		
 	};

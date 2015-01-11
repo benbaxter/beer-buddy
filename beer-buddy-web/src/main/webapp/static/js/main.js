@@ -13,7 +13,7 @@ var library = (function() {'use strict';
 	}
 	
 	function prepareUrl(url) {
-		return rateThisContext.contextPath + url;
+		return beerBuddyContext.contextPath + url;
 	}
 
 	return {

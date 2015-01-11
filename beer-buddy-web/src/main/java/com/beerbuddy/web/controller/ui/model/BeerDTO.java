@@ -1,25 +1,13 @@
-package com.beerbuddy.core.model;
+package com.beerbuddy.web.controller.ui.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="book")
-public class Book {
+public class BeerDTO {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     protected String name;
     protected String author;
-    protected BookState state;
-    
-    @Column(name="dewey_decimal")
+    protected String state;    
     protected String deweyDecimal;
     
 	public long getId() {
@@ -47,10 +35,10 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public BookState getState() {
+	public String getState() {
 		return state;
 	}
-	public void setState(BookState state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 }

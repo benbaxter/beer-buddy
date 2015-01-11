@@ -62,7 +62,7 @@
 	
 		
 	<script type="text/javascript">
-		var rateThisContext = {
+		var beerBuddyContext = {
 			contextPath : "<%= request.getContextPath() %>"
 		};
 	</script> 
@@ -70,9 +70,6 @@
 	<script src="<c:url value='/static/js/ng-app.js'/>"></script>
 	<script src="<c:url value='/static/js/ng-home.js'/>"></script>
 	<script src="<c:url value='/static/js/ng-login.js'/>"></script>
-	
-	<script src="<c:url value='/static/js/ng-todo.js'/>"></script>
-	<script src="<c:url value='/static/js/ng-library.js'/>"></script>
 	
 	
 </body>

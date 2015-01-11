@@ -7,15 +7,16 @@
 	<groupId>com.beerbuddy</groupId>
 	<artifactId>beer-buddy-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Beer Buddu</name>
+	<name>Beer Buddy</name>
 	<description>This application is a personal beer rating/ranking application</description>
-	
+	 
 	<packaging>war</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<com.fasterxml.version>1.1.0</com.fasterxml.version>
+		<dbunit.version>2.5.0</dbunit.version>
 		<guava.version>18.0</guava.version>
 		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
@@ -125,6 +126,21 @@
 		    <scope>provided</scope>
 		    -->
 		</dependency>
+		
+		<!-- Includes mockito, hamcrest, and junit -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>${dbunit.version}</version>
+			<scope>test</scope>
+		</dependency>
+			
 		
 	</dependencies>
 

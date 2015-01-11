@@ -10,14 +10,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
-import com.beerbuddy.core.function.BeerStoreMapperFunction;
 import com.beerbuddy.core.repository.BeerRepository;
 import com.beerbuddy.core.repository.BeerSyncRepository;
-import com.beerbuddy.core.repository.BookRepository;
 import com.beerbuddy.core.service.BeerStoreSyncService;
-import com.beerbuddy.core.service.BookService;
-import com.beerbuddy.core.service.impl.BeerStoreSyncServiceImpl;
-import com.beerbuddy.core.service.impl.BookRepositoryService;
+import com.beerbuddy.core.service.impl.DefaultBeerStoreSyncService;
+import com.beerbuddy.core.service.impl.BeerStoreSyncServiceMonitor;
 import com.beerbuddy.web.listener.BeerStoreSyncListener;
 
 @Configuration
@@ -26,10 +23,6 @@ import com.beerbuddy.web.listener.BeerStoreSyncListener;
 @Import(RepositoryConfig.class)
 public class AppConfig {
 
-	@Autowired
-	@Qualifier("bookRepository")
-	private BookRepository bookRepository;
-	
 	@Autowired
 	@Qualifier("beerRepository")
 	private BeerRepository beerRepository;
@@ -49,19 +42,21 @@ public class AppConfig {
 	@Bean
 	@Autowired
 	public BeerStoreSyncListener beerStoreSyncListener(Environment environment,
-			@Qualifier("beerStoreSyncService") BeerStoreSyncService syncService) {
+			@Qualifier("beerStoreSyncServiceMonitor") BeerStoreSyncService syncService) {
 		return new BeerStoreSyncListener(environment, syncService);
 	}
 	
 	@Bean(name="beerStoreSyncService")
 	@Autowired
 	public BeerStoreSyncService beerStoreSyncService(RestTemplate restTemplate) { 
-		return new BeerStoreSyncServiceImpl(restTemplate, beerRepository, beerSyncRepository);
+		return new DefaultBeerStoreSyncService(restTemplate, beerRepository);
 	}
 	
-	@Bean(name="bookService")
-	public BookService bookService() {
-		return new BookRepositoryService(bookRepository);
+	@Bean(name="beerStoreSyncServiceMonitor")
+	@Autowired
+	public BeerStoreSyncService beerStoreSyncServiceMonitor(
+			@Qualifier("beerStoreSyncService") BeerStoreSyncService syncService) { 
+		return new BeerStoreSyncServiceMonitor(syncService, beerSyncRepository);
 	}
 	
 }
