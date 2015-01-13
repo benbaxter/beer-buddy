@@ -14,10 +14,7 @@ import org.dbunit.DataSourceDatabaseTester;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
-import org.hamcrest.core.Is;
-import org.hamcrest.core.IsEqual;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -30,7 +27,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.beerbuddy.core.model.Beer;
-import com.beerbuddy.web.config.TestRepositoryConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={TestRepositoryConfig.class})
@@ -61,13 +57,6 @@ public class BeerRepositoryIntegrationTest {
 	@After
 	public void tearDown() throws Exception {
 		databaseTester.onTearDown();
-	}
-	
-	@Test
-	public void trueIsTrue() {
-		Assert.assertTrue(true);
-		Assert.assertTrue("true is equal to true...", true);
-		Assert.assertThat(true, Is.is(IsEqual.equalTo(true)));
 	}
 	
 	@Test

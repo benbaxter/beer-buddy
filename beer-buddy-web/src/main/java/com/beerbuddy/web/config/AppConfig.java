@@ -12,9 +12,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.beerbuddy.core.repository.BeerRepository;
 import com.beerbuddy.core.repository.BeerSyncRepository;
+import com.beerbuddy.core.repository.UserRepository;
 import com.beerbuddy.core.service.BeerStoreSyncService;
-import com.beerbuddy.core.service.impl.DefaultBeerStoreSyncService;
+import com.beerbuddy.core.service.UserService;
 import com.beerbuddy.core.service.impl.BeerStoreSyncServiceMonitor;
+import com.beerbuddy.core.service.impl.DefaultBeerStoreSyncService;
+import com.beerbuddy.core.service.impl.DefaultUserService;
 import com.beerbuddy.web.listener.BeerStoreSyncListener;
 
 @Configuration
@@ -30,6 +33,10 @@ public class AppConfig {
 	@Autowired
 	@Qualifier("beerSyncRepository")
 	private BeerSyncRepository beerSyncRepository;
+	
+	@Autowired
+	@Qualifier("userRepository")
+	private UserRepository userRepository;
 	
 	@Autowired
 	Environment environment;
@@ -59,4 +66,8 @@ public class AppConfig {
 		return new BeerStoreSyncServiceMonitor(syncService, beerSyncRepository);
 	}
 	
+	@Bean
+	public UserService userService() { 
+		return new DefaultUserService(userRepository);
+	}
 }

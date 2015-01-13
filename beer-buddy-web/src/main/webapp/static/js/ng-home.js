@@ -1,4 +1,4 @@
-angular.module('rate-this-app')
+angular.module('beer-buddy-app')
 
 .controller('HomeController', [ '$scope', '$rootScope', 'BeerService', 
 	function($scope, $rootScope, BeerService) {
@@ -90,7 +90,7 @@ angular.module('rate-this-app')
 ;
 
 
-angular.module('rate-this-app')
+angular.module('beer-buddy-app')
 
 .service('BeerService', [ '$resource', function($resource) {
 	

@@ -41,6 +41,7 @@ public class DefaultBeerStoreSyncService implements BeerStoreSyncService, BeerSt
 			log.trace("beers have been mapped to model");
 			
 			beers.stream()
+			//TODO: FIXME! only grab beers with images
 			//takes too long to run.. come back later and multi thread this...
 //				.filter(b -> {
 //					//if we cannot get a valid image for a beer, we do not want it in our app

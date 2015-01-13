@@ -21,3 +21,15 @@
 .pull-right {
   float: right !important;
 }
+.text-md-primary {
+	color: rgb(3, 169, 244);
+}
+.text-md-accent {
+	color: rgba(158, 158, 158, 0.298039);
+}
+.text-md-warn {
+	color: rgb(244, 67, 54);
+}
+.text-md-green-primary {
+	color: #66bb6a;
+}

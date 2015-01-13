@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="rate-this-app" ng-strict-di>
+<html ng-app="beer-buddy-app" ng-strict-di>
 <%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
 <head>
 <title><sitemesh:write property='title'/></title>
+
+<meta name="_csrf" content="${_csrf.token}"/>
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <!-- 
 <link rel="stylesheet"

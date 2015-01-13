@@ -17,9 +17,11 @@
 
 		<com.fasterxml.version>1.1.0</com.fasterxml.version>
 		<dbunit.version>2.5.0</dbunit.version>
+		<google-api-client.version>1.19.0</google-api-client.version>
 		<guava.version>18.0</guava.version>
 		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
 		<javax.validation.version>1.1.0.Final</javax.validation.version>
+		<sitemesh.version>3.0.0</sitemesh.version>
 		<spring-boot.version>1.2.0.RELEASE</spring-boot.version>
 	</properties>
 
@@ -62,7 +64,11 @@
 		<dependency>
 			<groupId>org.sitemesh</groupId>
 			<artifactId>sitemesh</artifactId>
-			<version>3.0.0</version>
+			<version>${sitemesh.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 				
 		<dependency>
@@ -141,7 +147,6 @@
 			<scope>test</scope>
 		</dependency>
 			
-		
 	</dependencies>
 
 

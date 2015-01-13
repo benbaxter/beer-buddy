@@ -1,17 +1,45 @@
 
 <div layout="column">
-	
-	
-	<md-content>
-	    <md-card>
-	    	<form style="padding: 20px;">
-		      <div class="row">
-		          <md-text-float label="Username" ng-model="user.username"> </md-text-float>
-		          <md-text-float label="Password" type="password" ng-model="user.password"></md-text-float>
-		      </div>
-		      <md-button ng-click="submitLogin();" class="md-raised md-primary">Login</md-button>
-	    </form>
-	    </md-card>
+
+
+	<md-content> 
+		<md-card>
+		<form style="padding: 20px;" novalidate name="loginForm">
+			<div class="row">
+				<div class="text-md-green-primary" ng-show="signupComplete"> 
+					Congratulations! You are now a beer buddy! <br> Please login in continue.
+				</div>
+				<div ng-show="error.error"
+					class="text-md-warn"> 
+					{{error.message}} 
+				</div>
+				<div layout="row">
+					<div flex="15">
+						<md-text-float label="Username" ng-model="user.username" required name="username"> </md-text-float>
+					</div>
+					<div flex="30">
+						<div ng-show="loginForm.$submitted || loginForm.username.$touched"
+							class="text-md-warn"> 
+							<span ng-show="loginForm.username.$error.required"> Please enter a username. <br></span> 
+							<span ng-show="loginForm.username.$error.serverError">{{loginForm.username.$error.serverErrorMessage}} </span>
+						</div>
+					</div>
+				</div>
+				<div layout="row">
+					<div flex="15">
+						<md-text-float label="Password" type="password" ng-model="user.password" required name="password"></md-text-float>
+					</div>
+					<div flex="30">
+						<div ng-show="loginForm.$submitted || loginForm.password.$touched" class="text-md-warn"> 
+							<span ng-show="loginForm.password.$error.required"> Please enter a password. </span>
+						</div>
+					</div>
+				</div>
+				<md-button ng-click="submitLogin();" ng-disabled="loginInProgress" class="md-raised md-primary">Login</md-button>
+				<md-button ng-click="submitSignup();" ng-disabled="signupInProgress" class="md-raised md-accent" ng-hide="signupComplete">Sign up</md-button>
+			</div>
+		</form>
+		</md-card> 
 	</md-content>
 
 </div>

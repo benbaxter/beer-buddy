@@ -1,9 +1,13 @@
 
-var app = angular.module('rate-this-app', ['ngMaterial', 'ui.router', 'ngResource']);
+var app = angular.module('beer-buddy-app', ['ngMaterial', 'ui.router', 'ngResource']);
 
-app.config(['$stateProvider', '$urlRouterProvider',  
-            function($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",  
+            function($stateProvider, $urlRouterProvider, $httpProvider) {
 
+	var csrfToken = angular.element(document.querySelector("meta[name='_csrf']")).attr("content");
+	var csrfHeader = angular.element(document.querySelector("meta[name='_csrf_header']")).attr("content");
+	$httpProvider.defaults.headers.common[csrfHeader] = csrfToken;
+	
 	$urlRouterProvider.otherwise("/home");
 
 	$stateProvider
@@ -17,6 +21,12 @@ app.config(['$stateProvider', '$urlRouterProvider',
 	      url: "/login",
 	      templateUrl: "/static/partials/login.html",
 	      controller: "LoginController"
+	    })
+	    
+	    .state('logout', {
+	      url: "/logout",
+	      templateUrl: "/static/partials/login.html",
+	      controller: "LogoutController"
 	    })
 	  ;
 	
