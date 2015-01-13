@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.beerbuddy.core.model.DefaultUser;
+import com.beerbuddy.core.model.UserWrapper;
 import com.beerbuddy.core.repository.UserRepository;
 import com.beerbuddy.core.service.CrytpoFunctions;
 
@@ -54,7 +55,7 @@ public class BeerBuddyAuthenticationManager implements AuthenticationManager, Cr
 			//TODO: figure out which granted authorities we want to use... 
 			//TODO: define roles/authorization access
 			authentication = new UsernamePasswordAuthenticationToken(username, password, Collections.emptyList());
-			((UsernamePasswordAuthenticationToken) authentication).setDetails(user);
+			((UsernamePasswordAuthenticationToken) authentication).setDetails(new UserWrapper(user));
 			
 			//store in the security context
 			SecurityContext context = new SecurityContextImpl();
