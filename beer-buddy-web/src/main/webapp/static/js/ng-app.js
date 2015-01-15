@@ -1,13 +1,15 @@
 
-var app = angular.module('beer-buddy-app', ['ngMaterial', 'ui.router', 'ngResource']);
+var app = angular.module('beer-buddy-app', ['ngMaterial', 'ui.router', 'ngResource', 'ngMessages']);
 
-app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",  
+app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",   
             function($stateProvider, $urlRouterProvider, $httpProvider) {
 
 	var csrfToken = angular.element(document.querySelector("meta[name='_csrf']")).attr("content");
 	var csrfHeader = angular.element(document.querySelector("meta[name='_csrf_header']")).attr("content");
-	$httpProvider.defaults.headers.common[csrfHeader] = csrfToken;
-	
+	if( csrfHeader && csrfHeader !== "" ) {
+		$httpProvider.defaults.headers.common[csrfHeader] = csrfToken;
+	}
+
 	$urlRouterProvider.otherwise("/home");
 
 	$stateProvider
@@ -30,5 +32,7 @@ app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",
 	    })
 	  ;
 	
-}]);
+}])
+
+;
 

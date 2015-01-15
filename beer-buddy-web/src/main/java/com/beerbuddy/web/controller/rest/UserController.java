@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beerbuddy.core.model.User;
+import com.beerbuddy.core.model.UserProfile;
 import com.beerbuddy.core.service.UserService;
 import com.beerbuddy.core.service.impl.UserAlreadyExistsException;
 import com.beerbuddy.web.controller.ui.model.NewUserRequest;
@@ -29,6 +30,10 @@ public class UserController {
 	public ResponseEntity<?> create(@RequestBody NewUserRequest request) {
 		try {
 			User user = userService.createUser(request.getUsername(), request.getPassword());
+			UserProfile profile = new UserProfile();
+			profile.setEmail(request.getEmail());
+			profile.setName(request.getName());
+			user = userService.setUserProfile(user, profile);
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		} catch(UserAlreadyExistsException e) {
 			Map<String, String> error = ImmutableMap.

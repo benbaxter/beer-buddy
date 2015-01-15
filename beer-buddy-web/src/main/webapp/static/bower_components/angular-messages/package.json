@@ -1,7 +1,7 @@
 {
-  "name": "angular-resource",
+  "name": "angular-messages",
   "version": "1.3.9",
-  "description": "AngularJS module for interacting with RESTful server-side data sources",
+  "description": "AngularJS module that provides enhanced support for displaying messages within templates",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,7 +13,6 @@
     "angular",
     "framework",
     "browser",
-    "rest",
     "client-side"
   ],
   "author": "Angular Core Team <angular-core+npm@google.com>",

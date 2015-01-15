@@ -60,6 +60,7 @@
     <script src="<c:url value='/static/bower_components/angular-aria/angular-aria.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-animate/angular-animate.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-resource/angular-resource.js'/>"></script>
+    <script src="<c:url value='/static/bower_components/angular-messages/angular-messages.min.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-ui-router/release/angular-ui-router.min.js'/>"></script>
     <script src="<c:url value='/static/bower_components/hammerjs/hammer.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-material/angular-material.js'/>"></script>

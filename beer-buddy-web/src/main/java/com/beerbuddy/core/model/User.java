@@ -8,4 +8,9 @@ public interface User {
 	
 	public Date getLastLogin();
 	
+	public String getName();
+	
+	public String getEmail();
+	
+	public void setProfile(UserProfile profile);
 }

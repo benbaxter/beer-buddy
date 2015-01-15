@@ -9,7 +9,12 @@ public class UserWrapper implements User {
 	protected User user;
 
 	public UserWrapper(User user) {
-		this.user = user;
+		//avoid the potential endless wrapping
+		if( user instanceof UserWrapper ) {
+			this.user = ((UserWrapper) user).getUser();
+		} else {
+			this.user = user;
+		}
 	}
 
     @JsonProperty("lastLoginInMillis")
@@ -21,6 +26,11 @@ public class UserWrapper implements User {
 	}
     
     @Override
+    public void setProfile(UserProfile profile) {
+    	user.setProfile(profile);
+    }
+    
+    @Override
     public String getUsername() {
     	return user.getUsername();
     }
@@ -30,6 +40,16 @@ public class UserWrapper implements User {
     	return user.getLastLogin();
     }
  
+    @Override
+    public String getEmail() {
+    	return user.getEmail();
+    }
+    
+    @Override
+    public String getName() {
+    	return user.getName();
+    }
+    
     /**
      * This is set to protected so that only those in this package have access 
      * to the real user object. It makes testing easier; however it could lead to 

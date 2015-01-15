@@ -7,9 +7,10 @@ angular.module('beer-buddy-app')
 	var Login = $resource("/login");
 	
 	$rootScope.menu = $rootScope.menu || {};
-	$rootScope.menu.currentPage = "Login";
+	$rootScope.menu.currentPage = "Beer Buddy";
 
 	$scope.user = {};
+	$scope.newUser = {};
 	$rootScope.user = $scope.user;
 	
 	var clearErrors = function() {
@@ -33,9 +34,9 @@ angular.module('beer-buddy-app')
 				console.log(response);
 				
 				$scope.signupComplete = false;
-				$scope.user.isLoggedIn = true;
-				$scope.user.name = "Benjamin Baxter";
+				$scope.user = response;
 				$rootScope.user = $scope.user;
+				$scope.user.isLoggedIn = true;
 				
 				$scope.loginInProgress = false;
 				$state.go("home");
@@ -49,20 +50,21 @@ angular.module('beer-buddy-app')
 		}
 	};
 	
-	
 	$scope.submitSignup = function() {
 		clearErrors();
-		if( $scope.loginForm.$valid ) {
+		if( $scope.signupForm.$valid ) {
 			$scope.signupInProgress = true;
-			new User($scope.user).$save(function(response) {
+			new User($scope.newUser).$save(function(response) {
 				console.log(response);
 				$scope.signupComplete = true;
 				$scope.signupInProgress = false;
+				$scope.newUser = {};
 			}, function(error) {
 				console.log(error);
 				if( error.data.error ) {
-					$scope.loginForm.username.$error.serverError = error.data.error; 
-					$scope.loginForm.username.$error.serverErrorMessage = error.data.message;
+					$scope.signupForm.serverError = error.data || {};
+					$scope.signupForm.username.$error.serverError = error.data.error; 
+					$scope.signupForm.username.$error.serverErrorMessage = error.data.message;
 				}
 				$scope.signupInProgress = false;
 			});
@@ -78,9 +80,11 @@ angular.module('beer-buddy-app')
 	var Logout = $resource("/logout");
 	
 	$rootScope.menu = $rootScope.menu || {};
-	$rootScope.menu.currentPage = "Login";
+	$rootScope.menu.currentPage = "Beer Buddy";
 
 	Logout.get(function(response) {
+		$state.go("login");
+	}, function(response) {
 		$state.go("login");
 	});
 	

@@ -2,11 +2,14 @@ package com.beerbuddy.core.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,11 +32,31 @@ public class DefaultUser implements User {
     @Column(name="last_login")
     protected Date lastLogin;
     
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    protected UserProfile profile;
+ 
+    @Override
+    public String getEmail() {
+    	return profile.getEmail();
+    }
+    
+    @Override
+    public String getName() {
+    	return profile.getName();
+    }
+    
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public UserProfile getProfile() {
+		return profile;
+	}
+	@Override
+	public void setProfile(UserProfile profile) {
+		this.profile = profile;
 	}
 	public String getUsername() {
 		return username;

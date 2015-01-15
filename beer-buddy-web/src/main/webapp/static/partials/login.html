@@ -4,41 +4,97 @@
 
 	<md-content> 
 		<md-card>
-		<form style="padding: 20px;" novalidate name="loginForm">
-			<div class="row">
-				<div class="text-md-green-primary" ng-show="signupComplete"> 
-					Congratulations! You are now a beer buddy! <br> Please login in continue.
-				</div>
-				<div ng-show="error.error"
-					class="text-md-warn"> 
-					{{error.message}} 
-				</div>
-				<div layout="row">
-					<div flex="15">
-						<md-text-float label="Username" ng-model="user.username" required name="username"> </md-text-float>
-					</div>
-					<div flex="30">
-						<div ng-show="loginForm.$submitted || loginForm.username.$touched"
+			<div layout="row">
+				<md-card>
+					<md-toolbar>
+				      <h2 class="md-toolbar-tools">
+				        <span>Login</span>
+				      </h2>
+				    </md-toolbar>
+					<form style="padding: 20px;" novalidate name="loginForm">
+						<div ng-show="error.error"
 							class="text-md-warn"> 
-							<span ng-show="loginForm.username.$error.required"> Please enter a username. <br></span> 
-							<span ng-show="loginForm.username.$error.serverError">{{loginForm.username.$error.serverErrorMessage}} </span>
+							{{error.message}} 
 						</div>
-					</div>
-				</div>
-				<div layout="row">
-					<div flex="15">
-						<md-text-float label="Password" type="password" ng-model="user.password" required name="password"></md-text-float>
-					</div>
-					<div flex="30">
-						<div ng-show="loginForm.$submitted || loginForm.password.$touched" class="text-md-warn"> 
-							<span ng-show="loginForm.password.$error.required"> Please enter a password. </span>
+						<div layout="row">
+							<div flex="15">
+								<md-text-float label="Username" ng-model="user.username" required name="username"> </md-text-float>
+							</div>
+							<!-- 
+							<div flex="30">
+								<div ng-show="loginForm.$submitted || loginForm.username.$touched"
+									class="text-md-warn"> 
+									<span ng-show="loginForm.username.$error.required"> Please enter a username. <br></span> 
+									<span ng-show="loginForm.username.$error.serverError">{{loginForm.username.$error.serverErrorMessage}} </span>
+								</div>
+							</div>
+							 -->
 						</div>
-					</div>
-				</div>
-				<md-button ng-click="submitLogin();" ng-disabled="loginInProgress" class="md-raised md-primary">Login</md-button>
-				<md-button ng-click="submitSignup();" ng-disabled="signupInProgress" class="md-raised md-accent" ng-hide="signupComplete">Sign up</md-button>
+						<div layout="row">
+							<div flex="15">
+								<md-text-float label="Password" type="password" ng-model="user.password" required name="password"></md-text-float>
+							</div>
+							<!-- 
+							<div flex="30">
+								<div ng-show="loginForm.$submitted || loginForm.password.$touched" class="text-md-warn"> 
+									<span ng-show="loginForm.password.$error.required"> Please enter a password. </span>
+								</div>
+							</div>
+							 -->
+						</div>
+						<md-button ng-click="submitLogin();" ng-disabled="loginInProgress" class="md-raised md-primary">Login</md-button>
+					</form>
+				</md-card>
+				<md-card flex="30">
+				
+					<md-toolbar>
+				      <h2 class="md-toolbar-tools">
+				        <span>Sign Up Today!</span>
+				      </h2>
+				    </md-toolbar>
+					<form style="padding: 20px;" name="signupForm">
+						<div class="text-md-green-primary" ng-show="signupComplete"> 
+							Congratulations! You are now a beer buddy! <br> Please login in continue.
+						</div>
+						<div ng-show="signupForm.serverError"
+							class="text-md-warn"> 
+							{{signupForm.serverError.message}} 
+						</div>
+							<md-input-container>
+ 								<md-text-float label="Name" ng-model="newUser.name" required name="name"></md-text-float>
+ 								<!-- 
+						        <div ng-messages="signupForm.name.$error" class="text-md-warn">
+						          <div ng-message="required">This is required.</div>
+						        </div>
+ 								 -->
+							</md-input-container>
+							<md-input-container>
+								<md-text-float label="Email" ng-model="newUser.email" required type="email" name="email"></md-text-float>
+								<!-- 
+								 <div ng-messages="signupForm.email.$error" class="text-md-warn">
+							          <div ng-message="required">This is required.</div>
+							          <div ng-message="email">Please enter a valid email.</div>
+							        </div>
+								 -->
+							</md-input-container>
+							<md-input-container>
+								<md-text-float label="Username" ng-model="newUser.username" required name="username"> 
+								</md-text-float>
+								<!-- 
+								 <div ng-messages="signupForm.username.$error" class="text-md-warn">
+							          <div ng-message="required">This is required.</div>
+							        </div>
+								 -->
+							</md-input-container>
+							<md-input-container>
+							<div>
+								<md-text-float label="Password" type="password" ng-model="newUser.password" required name="password"></md-text-float>
+							</div>
+							</md-input-container>
+						<md-button ng-click="submitSignup();" ng-disabled="signupInProgress" md-theme="green" class="md-raised md-primary">Sign up</md-button>
+					</form>
+				</md-card>
 			</div>
-		</form>
 		</md-card> 
 	</md-content>
 
