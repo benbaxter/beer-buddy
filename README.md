@@ -4,6 +4,8 @@ This is a personal beer ranking/rating system. It is also going to serve as a sa
 
 This application is built with spring-boot, angular, and material design
 
+If you have any suggestions to make this a better application, please feel free to contact me or create an issue.
+
 #Getting Started
 From beer-buddy/beer-buddy project run the following maven commands:
 <pre>mvn clean install</pre>
