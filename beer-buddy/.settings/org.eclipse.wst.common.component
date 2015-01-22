@@ -2,11 +2,6 @@
     <wb-module deploy-name="beer-buddy-web">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="beer-buddy-core-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/beer-buddy-core/beer-buddy-core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="beer-buddy"/>
         <property name="java-output-path" value="/beer-buddy-web/target/classes"/>
     </wb-module>

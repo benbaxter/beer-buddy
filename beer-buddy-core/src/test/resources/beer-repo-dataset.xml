@@ -1,0 +1,76 @@
+<dataset>
+	
+    <beer id="-1" 
+        name="My First Beer" 
+        beer_store_id="-1" 
+        image_url="https://www.google.com" 
+        category="Import" 
+        abv="5.5"
+        type="Ale" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="true"
+        />
+    
+    <beer id="-2" 
+        name="My Second Beer" 
+        beer_store_id="-2" 
+        image_url="bad_url" 
+        category="Craft" 
+        abv="3.5"
+        type="Malt" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="false"
+        />
+    
+    <beer id="-3" 
+        name="My Third Beer" 
+        beer_store_id="-3" 
+        image_url="bad_url" 
+        category="Craft" 
+        abv="3.5"
+        type="Malt" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="false"
+        />
+    
+    <beer id="-4" 
+        name="My Fourth Beer" 
+        beer_store_id="-4" 
+        image_url="bad_url" 
+        category="Craft" 
+        abv="3.5"
+        type="Malt" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="false"
+        />
+    
+    <beer id="-5" 
+        name="My Fifth Beer" 
+        beer_store_id="-5" 
+        image_url="bad_url" 
+        category="Craft" 
+        abv="3.5"
+        type="Malt" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="false"
+        />
+    
+    <beer id="-6" 
+        name="My Sixth Beer" 
+        beer_store_id="-6" 
+        image_url="bad_url" 
+        category="Craft" 
+        abv="3.5"
+        type="Malt" 
+        brewer="Home Brew"
+        country="US"
+        on_sale="false"
+        />
+    
+    
+</dataset>

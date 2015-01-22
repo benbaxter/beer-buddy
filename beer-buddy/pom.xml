@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>beer-buddy-master-pom</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.beerbuddy</groupId>
+	<name>Beer Buddy Master POM</name>
+	<description>This is a master pom to manage all the subprojects and dependencies</description>
+	 
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../beer-buddy-core</module>
+		<module>../beer-buddy-web</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<com.fasterxml.version>1.1.0</com.fasterxml.version>
+		<dbunit.version>2.5.0</dbunit.version>
+		<google-api-client.version>1.19.0</google-api-client.version>
+		<guava.version>18.0</guava.version>
+		<hibernate-validator.version>5.1.2.Final</hibernate-validator.version>
+		<javax.validation.version>1.1.0.Final</javax.validation.version>
+		<sitemesh.version>3.0.0</sitemesh.version>
+		<spring-boot.version>1.2.0.RELEASE</spring-boot.version>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.0.RELEASE</version>
+	</parent>
+
+	<dependencyManagement>
+		<dependencies>
+		
+			<dependency>
+				<groupId>com.beerbuddy</groupId>
+				<artifactId>beer-buddy-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>org.sitemesh</groupId>
+				<artifactId>sitemesh</artifactId>
+				<version>${sitemesh.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate-validator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml</groupId>
+				<artifactId>classmate</artifactId>
+				<version>${com.fasterxml.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${javax.validation.version}</version>
+			</dependency>
+					
+			<dependency>
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>${dbunit.version}</version>
+				<scope>test</scope>
+			</dependency>
+				
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>

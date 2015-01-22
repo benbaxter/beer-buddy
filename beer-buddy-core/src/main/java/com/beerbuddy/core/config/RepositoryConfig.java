@@ -1,4 +1,4 @@
-package com.beerbuddy.web.config;
+package com.beerbuddy.core.config;
 
 
 import org.springframework.boot.orm.jpa.EntityScan;

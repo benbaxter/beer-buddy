@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.web.client.RestTemplate;
 
+import com.beerbuddy.core.config.CoreConfig;
 import com.beerbuddy.core.repository.BeerRepository;
 import com.beerbuddy.core.repository.BeerSyncRepository;
 import com.beerbuddy.core.repository.UserProfileRepository;
@@ -24,7 +25,7 @@ import com.beerbuddy.web.listener.BeerStoreSyncListener;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-@Import(RepositoryConfig.class)
+@Import(CoreConfig.class)
 public class AppConfig {
 
 	@Autowired

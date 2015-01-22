@@ -4,11 +4,11 @@
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>beer-buddy-web</artifactId>
-	<name>Beer Buddy</name>
-	<description>This application is a personal beer rating/ranking application</description>
+	<artifactId>beer-buddy-core</artifactId>
+	<name>Beer Buddy Core</name>
+	<description>This is the core to beer buddy, providing the main services and biz logic</description>
 	 
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>com.beerbuddy</groupId>
@@ -16,29 +16,14 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../beer-buddy/pom.xml</relativePath>
 	</parent>
-
-	<build>
-		<finalName>beer-buddy</finalName>
-	</build>
-
+	
 	<dependencies>
-		<dependency>
-			<groupId>com.beerbuddy</groupId>
-			<artifactId>beer-buddy-core</artifactId>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.sitemesh</groupId>
-			<artifactId>sitemesh</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -62,23 +47,12 @@
 		</dependency>
 				
 				
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-		</dependency>
-
-		<!-- Provided (for embedded war support) -->
+		
+		<!-- magic for databases -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
 
 		<!-- insert your database dudes here -->
 		<!-- 
@@ -101,6 +75,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
 			<scope>test</scope>
 		</dependency>
 			
