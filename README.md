@@ -40,6 +40,10 @@ These are just some features that would be nice to add. Dare I call this a backl
 - [ ] Social
   - [ ] Tweet on titter?
   - [ ] Facebook sharing? posting?
+- [ ] Add data visualization
+  - [ ] Info-graphic like representation of how popular a beer is
+- [ ] Add list of users and scan their rankings of beers
+- [ ] Compare your ranking list with others
 - [ ] Add search abilities on beer. :question:
   - [ ] Contextual search like google?
   - [ ] Or advanced search options based on fields? 
