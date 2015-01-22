@@ -16,6 +16,7 @@ Another alternative is to look at spring-boots cli.
 #TODO's and Road Map
 These are just some features that would be nice to add. Dare I call this a backlog???  Currently the app is really basic...
 - [ ] Prioritize backlog
+- [ ] Define MVP
 - [ ] Front end performance 
   - [ ] Create gulp script to minify and compress js code
   - [ ] Clean out material-design-icons to reduce build time
