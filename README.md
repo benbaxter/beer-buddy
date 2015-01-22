@@ -18,10 +18,11 @@ These are just some features that would be nice to add. Dare I call this a backl
 - [ ] Prioritize backlog
 - [ ] Define MVP
 - [ ] Front end performance 
+  - [ ] Clean out material-design-icons to reduce build time
+  - [ ] Create bower dependency file
   - [ ] Create gulp script 
+	- [ ] automate bower dependency installs for bootstrapping the project
     - [ ] minify and compress js code
-    - [ ] automate bower dependency installs for bootstrapping the project
-    - [ ] Clean out material-design-icons to reduce build time
 - [ ] Modularize architecture
   - [x] Create a master pom
   - [x] Create a core project
