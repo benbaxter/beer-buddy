@@ -1,7 +1,13 @@
 package com.beerbuddy.core.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 
 import com.beerbuddy.core.model.DefaultUser;
@@ -48,5 +54,14 @@ public class DefaultUserService implements UserService, CrytpoFunctions {
 		profile.setUser(user);
 		userProfileRepository.save(profile);
 		return new UserWrapper(user);
+	}
+	
+	@Override
+	public Page<User> findAll(Pageable pageable) {
+		Page<UserProfile> page = userProfileRepository.findAll(pageable);
+		List<User> userContent = page.getContent().stream()
+				.map(profile -> new UserWrapper(profile))
+				.collect(Collectors.toList());
+		return new PageImpl<>(userContent); 
 	}
 }

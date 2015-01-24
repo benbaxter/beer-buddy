@@ -14,7 +14,7 @@
 		  </md-tabs>
 	
 	
-	<section>
+	<section ng-show="showBeer">
 			<!-- <md-subheader class="md-primary">Beer</md-subheader> -->
 			<md-list>
 		      <md-item ng-repeat="beer in beers">
@@ -37,6 +37,37 @@
 									<text x="50" y="85" fill="white" font-size="40px">75</text></svg>
 			            	</div>
 			           -->
+			          </div>
+		        </md-item-content>
+		      </md-item>
+		    </md-list>
+		    <md-button ng-click="loadMore();" ng-show="hasMore();"
+			        		class="md-fab md-primary face" aria-label="Load More">
+			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
+	            </md-icon>
+			 </md-button>
+		</section>
+		      
+		<section ng-show="showPeople">
+			<md-list>
+		      <md-item ng-repeat="person in people">
+		        <md-item-content layout="row">
+		        	<section class="md-tile-left" flex="10">
+		        	</section>
+			          <div flex="15" class="md-tile-content">
+			              <h3>{{person.name}}</h3>
+			              <h4 ng-show="! person.beers">They have not started drinking yet...</h4>
+			              <md-list ng-show="person.beers">
+				              <h4>Top Favorite Beers</h4>
+						      <md-item ng-repeat="beer in person.beers">
+						        <md-item-content layout="row">
+						        	<section class="md-tile-left" flex="10">
+						        	</section>
+							          <div flex="15" class="md-tile-content">
+							          </div>
+						        </md-item-content>
+						      </md-item>
+						    </md-list>
 			          </div>
 		        </md-item-content>
 		      </md-item>

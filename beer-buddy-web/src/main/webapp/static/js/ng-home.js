@@ -1,7 +1,7 @@
 angular.module('beer-buddy-app')
 
-.controller('HomeController', [ '$scope', '$rootScope', 'BeerService', 
-	function($scope, $rootScope, BeerService) {
+.controller('HomeController', [ '$scope', '$rootScope', 'BeerService', 'UserService', 
+	function($scope, $rootScope, BeerService, UserService) {
 
 		$rootScope.menu = $rootScope.menu || {};
 		//clear out page title so that default takes over
@@ -27,9 +27,11 @@ angular.module('beer-buddy-app')
 	
 		//load the first page...
 		$scope.nextPage();
+		$scope.showBeer = true;
 		
 		var tabs = [
-            { title: 'All'}
+            { title: 'All', action: 'show-all-beers' },
+            { title: 'Drinking Buddies', action: 'show-all-people' }
            ];
 		var types = [];
 		BeerService.getTypes(function(ts){
@@ -58,16 +60,30 @@ angular.module('beer-buddy-app')
 		 function selectType(tab) {
 			 $scope.page = -1;
 			 $scope.beers = [];
+			 $scope.people = [];
 			 if( types.indexOf(tab.title) > -1 ) {
 				 $scope.nextPageOfType(tab.title);
 				 $scope.loadMore = function() {
 					 $scope.nextPageOfType(tab.title);
 				}; 
+				$scope.showBeer = true;
+				$scope.showPeople = false;
 			 } else {
-				 $scope.nextPage();
-				 $scope.loadMore = function() {
-					$scope.nextPage();
-				};
+				 if( tab.action && tab.action === 'show-all-people' ) {
+					 $scope.nextPageOfPeople();
+					 $scope.loadMore = function() {
+						 $scope.nextPageOfPeople();
+					 };
+					 $scope.showBeer = false;
+					 $scope.showPeople = true;
+				 } else {
+					 $scope.nextPage();
+					 $scope.loadMore = function() {
+						 $scope.nextPage();
+					 };
+					 $scope.showBeer = true;
+					 $scope.showPeople = false;
+				 }
 			 }
 		}
 		function deselectType(tab) {
@@ -80,10 +96,20 @@ angular.module('beer-buddy-app')
 				$scope.totalPages = page.totalPages;
 				$scope.lastPage = page.last;
 			});
-		}
+		};
 		
 		$scope.loadMore = function() {
 			$scope.nextPage();
+		};
+		
+		$scope.people = $scope.people || [];
+		$scope.nextPageOfPeople = function() {
+			UserService.getPage($scope.page + 1, function(page) {
+				$scope.people = angular.copy(page.content, $scope.people);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
 		};
 	}])
 
@@ -118,4 +144,19 @@ angular.module('beer-buddy-app')
 	
 	
 	
-}]);
+}])
+
+.service('UserService', [ '$resource', function($resource) {
+	
+	var UserApi = $resource('/user');
+
+	return {
+		getPage : function(page, callback) {
+			return UserApi.get({page: page}, callback);
+		}
+	};
+	
+	
+	
+}])
+;
