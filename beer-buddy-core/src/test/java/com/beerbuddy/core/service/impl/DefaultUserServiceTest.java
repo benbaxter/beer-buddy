@@ -15,6 +15,8 @@ import org.mockito.MockitoAnnotations;
 import com.beerbuddy.core.model.DefaultUser;
 import com.beerbuddy.core.model.UnsecureUserWrapper;
 import com.beerbuddy.core.model.User;
+import com.beerbuddy.core.repository.BeerRepository;
+import com.beerbuddy.core.repository.UserBeerRankRepository;
 import com.beerbuddy.core.repository.UserProfileRepository;
 import com.beerbuddy.core.repository.UserRepository;
 
@@ -26,13 +28,19 @@ public class DefaultUserServiceTest {
 	@Mock
 	protected UserProfileRepository profileRepository;
 	
+	@Mock
+	protected UserBeerRankRepository rankRepository;
+	
+	@Mock
+	protected BeerRepository beerRepository;
+	
 	protected DefaultUserService service;
 	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 		
-		service = new DefaultUserService(repository, profileRepository);
+		service = new DefaultUserService(repository, profileRepository, rankRepository, beerRepository);
 	}
 	
 	@Test

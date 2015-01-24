@@ -1,5 +1,5 @@
 
-var library = (function() {'use strict';
+var beerBuddy = (function() {'use strict';
 
 	function getFormAsJson(formId) {
 		var array = $("#" + formId).serializeArray();
@@ -22,6 +22,9 @@ var library = (function() {'use strict';
 		}, 
 		prepareUrl : function(url) {
 			return prepareUrl(url);
+		},
+		getUser: function() {
+			return beerBuddyContext.user;
 		}
 	};
 })();

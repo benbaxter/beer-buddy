@@ -2,7 +2,9 @@ angular.module('beer-buddy-app')
 
 .controller('HomeController', [ '$scope', '$rootScope', 'BeerService', 'UserService', 
 	function($scope, $rootScope, BeerService, UserService) {
-
+	
+		$rootScope.user = beerBuddy.getUser() || {};
+	
 		$rootScope.menu = $rootScope.menu || {};
 		//clear out page title so that default takes over
 		delete $rootScope.menu.currentPage;
@@ -30,9 +32,13 @@ angular.module('beer-buddy-app')
 		$scope.showBeer = true;
 		
 		var tabs = [
-            { title: 'All', action: 'show-all-beers' },
-            { title: 'Drinking Buddies', action: 'show-all-people' }
-           ];
+            { title: 'All', action: 'show-all-beers' }
+         ];
+		if( $scope.user && $scope.user.isLoggedIn ) {
+			tabs.push({ title: 'Favorites', action: 'show-favorites' });
+		}
+		tabs.push({ title: 'Drinking Buddies', action: 'show-all-people' });
+
 		var types = [];
 		BeerService.getTypes(function(ts){
 			angular.forEach(ts, function(type) {
@@ -76,6 +82,14 @@ angular.module('beer-buddy-app')
 					 };
 					 $scope.showBeer = false;
 					 $scope.showPeople = true;
+				 } else if( tab.action && tab.action === 'show-favorites' ) {
+					 //TODO: FIXME! show favorite beers
+					 $scope.nextPageOfUsersBeers();
+					 $scope.loadMore = function() {
+						 $scope.nextPageOfUsersBeers();
+					 };
+					 $scope.showBeer = true;
+					 $scope.showPeople = false;
 				 } else {
 					 $scope.nextPage();
 					 $scope.loadMore = function() {
@@ -111,8 +125,23 @@ angular.module('beer-buddy-app')
 				$scope.lastPage = page.last;
 			});
 		};
-	}])
+		
+		$scope.nextPageOfUsersBeers = function() {
+			UserService.getUsersBeers($scope.page + 1, function(page) {
+				$scope.beers = angular.copy(page.content, $scope.beers);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		};
 
+		$scope.addToRank = function(beer) {
+			UserService.addBeerToRanking(beer, function(response) {
+				console.log(response);
+			});
+		};
+
+	}])
 ;
 
 
@@ -142,21 +171,29 @@ angular.module('beer-buddy-app')
 		
 	};
 	
-	
-	
 }])
 
 .service('UserService', [ '$resource', function($resource) {
 	
-	var UserApi = $resource('/user');
-
+	var baseUrl = "/users";
+	
+	var UserApi = $resource(baseUrl);
+	
+	var UsersBeers = $resource(baseUrl + '/beers');
+	
 	return {
 		getPage : function(page, callback) {
 			return UserApi.get({page: page}, callback);
 		}
+		, getUsersBeers : function(page, callback) {
+			return UsersBeers.get({page: page}, callback);
+		}
+		, addBeerToRanking : function(beer, callback) {
+			return new UsersBeers(beer).$save(function(response) {
+				callback(response);
+			});
+		}
 	};
-	
-	
 	
 }])
 ;

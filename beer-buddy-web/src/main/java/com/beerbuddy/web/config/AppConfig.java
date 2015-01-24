@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.beerbuddy.core.config.CoreConfig;
 import com.beerbuddy.core.repository.BeerRepository;
 import com.beerbuddy.core.repository.BeerSyncRepository;
+import com.beerbuddy.core.repository.UserBeerRankRepository;
 import com.beerbuddy.core.repository.UserProfileRepository;
 import com.beerbuddy.core.repository.UserRepository;
 import com.beerbuddy.core.service.BeerStoreSyncService;
@@ -44,6 +45,9 @@ public class AppConfig {
 	private UserProfileRepository userProfileRepository;
 	
 	@Autowired
+	private UserBeerRankRepository userBeerRankRepository;
+	
+	@Autowired
 	Environment environment;
 	
 	@Bean
@@ -73,6 +77,9 @@ public class AppConfig {
 	
 	@Bean
 	public UserService userService() { 
-		return new DefaultUserService(userRepository, userProfileRepository);
+		return new DefaultUserService(userRepository, 
+				userProfileRepository, 
+				userBeerRankRepository,
+				beerRepository);
 	}
 }

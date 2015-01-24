@@ -65,10 +65,20 @@
     <script src="<c:url value='/static/bower_components/hammerjs/hammer.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-material/angular-material.js'/>"></script>
 	
-		
+			
 	<script type="text/javascript">
 		var beerBuddyContext = {
 			contextPath : "<%= request.getContextPath() %>"
+			<c:if test="${not empty user}">
+			, user : {
+				  "name" : "${user.name}",
+				  "lastLogin" : "${user.lastLogin}",
+				  "username" : "${user.username}",
+				  "email" : "${user.email}",
+				  "lastLoginInMillis" : ${user.lastLoginInMillis},
+				  "isLoggedIn": true
+			}
+			</c:if> 
 		};
 	</script> 
 	<script src="<c:url value='/static/js/main.js'/>"></script>

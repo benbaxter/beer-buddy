@@ -23,7 +23,16 @@
 		        		<img ng-src="{{beer.imageUrl}}" class="face" alt="{{beer.name}}">
 		        	</section>
 			          <div flex="15" class="md-tile-content">
-			              <h3>{{beer.name}}</h3>
+			              <h3>{{beer.name}} 
+			              	<span class="pull-right" ng-show="user.isLoggedIn">
+				              	<md-icon ng-show="ranked"
+				              		icon="/static/imgs/svg/ic_favorite_24px.svg" >
+				              	</md-icon>
+				              	<md-button ng-show="! ranked" ng-click="addToRank(beer)" aria-label="Add to Favorites">
+				              		<md-icon icon="/static/imgs/svg/ic_favorite_outline_24px.svg"></md-icon>
+				              	</md-button>
+			              	</span>
+			              </h3>
 			              <h4>{{beer.brewer}} <span class="pull-right">ABV: {{beer.abv}}</span></h4>
 			              <h4>{{beer.category}} - {{beer.type}} </h4>
 			          </div>
