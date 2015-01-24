@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="user_beer_rank")
 public class UserBeerRank {
@@ -16,6 +18,7 @@ public class UserBeerRank {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="user_profile_id")
     protected UserProfile user;

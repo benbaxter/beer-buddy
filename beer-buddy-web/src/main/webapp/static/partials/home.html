@@ -14,7 +14,7 @@
 		  </md-tabs>
 	
 	
-	<section ng-show="showBeer">
+		<section ng-show="showBeer">
 			<!-- <md-subheader class="md-primary">Beer</md-subheader> -->
 			<md-list>
 		      <md-item ng-repeat="beer in beers">
@@ -25,10 +25,10 @@
 			          <div flex="15" class="md-tile-content">
 			              <h3>{{beer.name}} 
 			              	<span class="pull-right" ng-show="user.isLoggedIn">
-				              	<md-icon ng-show="ranked"
+				              	<md-icon ng-show="beer.ranked"
 				              		icon="/static/imgs/svg/ic_favorite_24px.svg" >
 				              	</md-icon>
-				              	<md-button ng-show="! ranked" ng-click="addToRank(beer)" aria-label="Add to Favorites">
+				              	<md-button ng-show="! beer.ranked" ng-click="addToRank(beer)" aria-label="Add to Favorites">
 				              		<md-icon icon="/static/imgs/svg/ic_favorite_outline_24px.svg"></md-icon>
 				              	</md-button>
 			              	</span>
@@ -57,6 +57,28 @@
 			 </md-button>
 		</section>
 		      
+		<section ng-show="showUsersBeer">
+			<md-list>
+		      <md-item ng-repeat="rank in beers">
+		        <md-item-content layout="row">
+		        	<section class="md-tile-left" flex="10">
+		        		<img ng-src="{{rank.beer.imageUrl}}" class="face" alt="{{rank.beer.name}}">
+		        	</section>
+			          <div flex="15" class="md-tile-content">
+			              <h3>{{rank.beer.name}}</h3>
+			              <h4>{{rank.beer.brewer}} <span class="pull-right">ABV: {{rank.beer.abv}}</span></h4>
+			              <h4>{{rank.beer.category}} - {{rank.beer.type}} </h4>
+			          </div>
+		        </md-item-content>
+		      </md-item>
+		    </md-list>
+		    <md-button ng-click="loadMore();" ng-show="hasMore();"
+			        		class="md-fab md-primary face" aria-label="Load More">
+			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
+	            </md-icon>
+			 </md-button>
+		</section>
+		
 		<section ng-show="showPeople">
 			<md-list>
 		      <md-item ng-repeat="person in people">

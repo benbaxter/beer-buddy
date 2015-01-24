@@ -29,12 +29,13 @@ import com.beerbuddy.core.security.BeerBuddySecurityContextHelper;
 import com.beerbuddy.core.service.UserService;
 import com.beerbuddy.core.service.impl.UserAlreadyExistsException;
 import com.beerbuddy.web.controller.ui.model.BeerDTO;
+import com.beerbuddy.web.controller.ui.model.BeerMapper;
 import com.beerbuddy.web.controller.ui.model.NewUserRequest;
 import com.google.common.collect.ImmutableMap;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UserController implements BeerMapper {
 
 	@Autowired
 	UserService userService;
@@ -75,8 +76,10 @@ public class UserController {
 	public ResponseEntity<?> getUsersBeers() {
 		User user = BeerBuddySecurityContextHelper.getUser();
 		if( user != null ) {
-			Set<UserBeerRank> userPage = userService.findBeerRankingsForUser(user.getProfileId());
-			return new ResponseEntity<>(userPage, HttpStatus.OK);
+			Set<UserBeerRank> userBeers = userService.findBeerRankingsForUser(user.getProfileId());
+			return new ResponseEntity<>(
+					ImmutableMap.of("content", userBeers), 
+					HttpStatus.OK);
 		}
 		return new ResponseEntity<>("You must be logged in to see your favorite beers", 
 				HttpStatus.FORBIDDEN);

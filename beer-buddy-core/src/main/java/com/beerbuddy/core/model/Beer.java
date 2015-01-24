@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="beer")
 public class Beer {
@@ -36,6 +38,7 @@ public class Beer {
     @Column(name="on_sale")
     protected boolean onSale;
     
+    @JsonIgnore
     @OneToMany(fetch=FetchType.LAZY, mappedBy="beer")
     protected Set<UserBeerRank> userBeerRankings;
 

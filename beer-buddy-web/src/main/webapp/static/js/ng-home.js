@@ -3,7 +3,7 @@ angular.module('beer-buddy-app')
 .controller('HomeController', [ '$scope', '$rootScope', 'BeerService', 'UserService', 
 	function($scope, $rootScope, BeerService, UserService) {
 	
-		$rootScope.user = beerBuddy.getUser() || {};
+		$rootScope.user = $rootScope.user || beerBuddy.getUser() || {};
 	
 		$rootScope.menu = $rootScope.menu || {};
 		//clear out page title so that default takes over
@@ -30,6 +30,7 @@ angular.module('beer-buddy-app')
 		//load the first page...
 		$scope.nextPage();
 		$scope.showBeer = true;
+		$scope.showUsersBeer = false;
 		
 		var tabs = [
             { title: 'All', action: 'show-all-beers' }
@@ -73,6 +74,7 @@ angular.module('beer-buddy-app')
 					 $scope.nextPageOfType(tab.title);
 				}; 
 				$scope.showBeer = true;
+				$scope.showUsersBeer = false;
 				$scope.showPeople = false;
 			 } else {
 				 if( tab.action && tab.action === 'show-all-people' ) {
@@ -81,14 +83,15 @@ angular.module('beer-buddy-app')
 						 $scope.nextPageOfPeople();
 					 };
 					 $scope.showBeer = false;
+					 $scope.showUsersBeer = false;
 					 $scope.showPeople = true;
 				 } else if( tab.action && tab.action === 'show-favorites' ) {
-					 //TODO: FIXME! show favorite beers
 					 $scope.nextPageOfUsersBeers();
 					 $scope.loadMore = function() {
 						 $scope.nextPageOfUsersBeers();
 					 };
-					 $scope.showBeer = true;
+					 $scope.showBeer = false;
+					 $scope.showUsersBeer = true;
 					 $scope.showPeople = false;
 				 } else {
 					 $scope.nextPage();
@@ -96,6 +99,7 @@ angular.module('beer-buddy-app')
 						 $scope.nextPage();
 					 };
 					 $scope.showBeer = true;
+					 $scope.showUsersBeer = false;
 					 $scope.showPeople = false;
 				 }
 			 }
@@ -138,6 +142,9 @@ angular.module('beer-buddy-app')
 		$scope.addToRank = function(beer) {
 			UserService.addBeerToRanking(beer, function(response) {
 				console.log(response);
+				if(response.message === "Beer added!") {
+					beer.ranked = true;
+				}
 			});
 		};
 
