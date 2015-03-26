@@ -1,6 +1,5 @@
 package com.beerbuddy.core.service.impl;
 
-
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
