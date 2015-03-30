@@ -19,9 +19,30 @@ angular.module('beer-buddy-app')
 		$scope.nextPage = function() {
 			BeerService.getPage($scope.page + 1, function(page) {
 				$scope.beers = angular.copy(page.content, $scope.beers);
+				var beers = $scope.beers;
 				$scope.page = page.number;
 				$scope.totalPages = page.totalPages;
 				$scope.lastPage = page.last;
+				var temp = [];
+				var count = 0;
+				for(var i = 0; i<beers.length; i++)
+				{
+					if(beers[i+3] === undefined)
+					{
+						temp[count] = { top: beers[i], isBottom: false};
+					}else
+					{
+						temp[count] = { top: beers[i], isBottom: true, bottom: beers[i+3]};
+					}
+					if((i+1) % 3 === 0)
+					{
+						i++;
+						i++;
+						i++;
+					}
+					count++;
+				}
+				$scope.beers = temp;
 			});
 		};
 	

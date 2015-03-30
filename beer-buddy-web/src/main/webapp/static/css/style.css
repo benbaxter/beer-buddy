@@ -1,4 +1,7 @@
-
+.beer {
+	width : 80%
+}
+div.beer{background:#fff;color:#3498db;font-size:18px; margin:10px;padding:2%;position:relative;}
 .ninja {
 	display: none;
 }

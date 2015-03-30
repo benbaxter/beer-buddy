@@ -23,10 +23,14 @@
 
 <section>
       <div class="blue">
-      <slick class="slider single-item" slides-to-show="3" init-onload="true" slides-to-scroll="3" style="width:70%; margin-left:auto; margin-right:auto;">
+      <slick class=" beer lazy single-item" infinite="false" slides-to-show="3" slides-to-scroll="3" init-onload="true" data="beers">
         <div ng-repeat="beer in beers">
-        <h3>  {{beer.name}} </h3>
-      </div>
+        <div class="beer">
+        Name : {{beer.top.name}}<br>
+        Brewery: {{beer.top.brewer}} 
+        </div>
+        <div class="beer" ng-Show="beer.isBottom"> {{beer.bottom.name}}	</div>
+      	</div>
 
 			<!-- <md-subheader class="md-primary">Beer</md-subheader>
 

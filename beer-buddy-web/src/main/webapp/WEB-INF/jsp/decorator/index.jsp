@@ -48,8 +48,8 @@
     <script src="<c:url value='/static/bower_components/angular-ui-router/release/angular-ui-router.min.js'/>"></script>
     <script src="<c:url value='/static/bower_components/hammerjs/hammer.js'/>"></script>
     <script src="<c:url value='/static/bower_components/angular-material/angular-material.js'/>"></script>
-    <script src="/static/bower_components/slick/slick.min.js" type="text/javascript"></script>
-    <script src="/static/bower_components/angular-slick/dist/slick.min.js" type="text/javascript"></script>
+    <script src="/static/bower_components/slick/slick.js" type="text/javascript"></script>
+    <script src="/static/bower_components/angular-slick/dist/slick.js" type="text/javascript"></script>
 
 <sitemesh:write property='head'/>
 
