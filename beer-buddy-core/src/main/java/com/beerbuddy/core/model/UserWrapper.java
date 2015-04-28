@@ -48,6 +48,11 @@ public class UserWrapper implements User {
     public String getName() {
     	return user.getName();
     }
+
+    @Override
+    public Long getProfileId() {
+    	return user.getProfileId();
+    }
     
     /**
      * This is set to protected so that only those in this package have access 
