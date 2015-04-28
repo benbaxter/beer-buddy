@@ -46,6 +46,129 @@ angular.module('beer-buddy-app')
 					
 
 					// load the first page...
+					}
+					if((i+1) % 3 === 0)
+					{
+						i++;
+						i++;
+						i++;
+					}
+					count++;
+				}
+				$scope.beers = temp;
+		
+		var tabs = [
+            { title: 'All'}
+           ];
+		$scope.showBeer = true;
+		$scope.showUsersBeer = false;
+		
+		var tabs = [
+            { title: 'All', action: 'show-all-beers' }
+         ];
+		if( $scope.user && $scope.user.isLoggedIn ) {
+			tabs.push({ title: 'Favorites', action: 'show-favorites' });
+		}
+		tabs.push({ title: 'Drinking Buddies', action: 'show-all-people' });
+
+			 if( types.indexOf(tab.title) > -1 ) {
+				 $scope.nextPageOfType(tab.title);
+				 $scope.loadMore = function() {
+					 $scope.nextPageOfType(tab.title);
+				}; 
+			 } else {
+				 $scope.nextPage();
+				 $scope.loadMore = function() {
+					$scope.nextPage();
+				};
+			 }
+		}
+		function deselectType(tab) {
+			$scope.greeting = 'Hello ' + tab.title + '!';
+		}
+		$scope.nextPageOfType = function(type) {
+			BeerService.getType(type, $scope.page + 1, function(page) {
+				$scope.beers = angular.copy(page.content, $scope.beers);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		}
+		
+		$scope.loadMore = function() {
+			$scope.nextPage();
+		};
+			 $scope.people = [];
+			 if( types.indexOf(tab.title) > -1 ) {
+				 $scope.nextPageOfType(tab.title);
+				 $scope.loadMore = function() {
+					 $scope.nextPageOfType(tab.title);
+				}; 
+				$scope.showBeer = true;
+				$scope.showUsersBeer = false;
+				$scope.showPeople = false;
+			 } else {
+				 if( tab.action && tab.action === 'show-all-people' ) {
+					 $scope.nextPageOfPeople();
+					 $scope.loadMore = function() {
+						 $scope.nextPageOfPeople();
+					 };
+					 $scope.showBeer = false;
+					 $scope.showUsersBeer = false;
+					 $scope.showPeople = true;
+				 } else if( tab.action && tab.action === 'show-favorites' ) {
+					 $scope.nextPageOfUsersBeers();
+					 $scope.loadMore = function() {
+						 $scope.nextPageOfUsersBeers();
+					 };
+					 $scope.showBeer = false;
+					 $scope.showUsersBeer = true;
+					 $scope.showPeople = false;
+				 } else {
+					 $scope.nextPage();
+					 $scope.loadMore = function() {
+						 $scope.nextPage();
+					 };
+					 $scope.showBeer = true;
+					 $scope.showUsersBeer = false;
+					 $scope.showPeople = false;
+				 }
+			 }
+		}
+		function deselectType(tab) {
+			$scope.greeting = 'Hello ' + tab.title + '!';
+		}
+		$scope.nextPageOfType = function(type) {
+			BeerService.getType(type, $scope.page + 1, function(page) {
+				$scope.beers = angular.copy(page.content, $scope.beers);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		};
+		
+		$scope.loadMore = function() {
+			$scope.nextPage();
+		};
+		
+		$scope.people = $scope.people || [];
+		$scope.nextPageOfPeople = function() {
+			UserService.getPage($scope.page + 1, function(page) {
+				$scope.people = angular.copy(page.content, $scope.people);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		};
+		
+		$scope.nextPageOfUsersBeers = function() {
+			UserService.getUsersBeers($scope.page + 1, function(page) {
+				$scope.beers = angular.copy(page.content, $scope.beers);
+				$scope.page = page.number;
+				$scope.totalPages = page.totalPages;
+				$scope.lastPage = page.last;
+			});
+		};
 					$scope.nextPage();
 
 					var tabs = [ {
@@ -115,6 +238,15 @@ angular.module('beer-buddy-app')
 					};
 				} ])
 
+		$scope.addToRank = function(beer) {
+			UserService.addBeerToRanking(beer, function(response) {
+				console.log(response);
+				if(response.message === "Beer added!") {
+					beer.ranked = true;
+				}
+			});
+		};
+
 ;
 
 angular.module('beer-buddy-app')
@@ -149,5 +281,33 @@ angular.module('beer-buddy-app')
 		}
 
 	};
+}])
 
+	
+	
+}]);
+.service('UserService', [ '$resource', function($resource) {
+	
+	var baseUrl = "/users";
+	
+	var UserApi = $resource(baseUrl);
+	
+	var UsersBeers = $resource(baseUrl + '/beers');
+	
+	return {
+		getPage : function(page, callback) {
+			return UserApi.get({page: page}, callback);
+		}
+		, getUsersBeers : function(page, callback) {
+			return UsersBeers.get({page: page}, callback);
+		}
+		, addBeerToRanking : function(beer, callback) {
+			return new UsersBeers(beer).$save(function(response) {
+				callback(response);
+			});
+		}
+	};
+	
+}])
+;
 } ]);

@@ -51,6 +51,15 @@ public class DefaultUser implements User {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	@Override
+	public Long getProfileId() {
+		if( profile != null ) {
+			return profile.getProfileId();
+		} 
+		return null;
+	}
+	
 	public UserProfile getProfile() {
 		return profile;
 	}
