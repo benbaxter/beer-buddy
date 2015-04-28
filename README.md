@@ -17,6 +17,7 @@ Another alternative is to look at spring-boots cli.
 These are just some features that would be nice to add. Dare I call this a backlog???  Currently the app is really basic...
 - [ ] Prioritize backlog
 - [ ] Define MVP
+- [ ] Create self-documenting API page
 - [ ] Front end performance 
   - [ ] Clean out material-design-icons to reduce build time
   - [ ] Create bower dependency file

@@ -10,13 +10,10 @@
 </select></div>
 
 	<md-content>
-
 		<md-tabs md-selected="selectedIndex">
-		    <md-tab ng-repeat="tab in tabs" md-on-select="selectType(tab)"
 		    		md-on-deselect="deselectType(tab)"
 		    	ng-disabled="tab.disabled" label="{{tab.title}}">
 		    <div layout="column">
-
 		      </div>
 		    </md-tab>
 		  </md-tabs>
@@ -41,7 +38,16 @@
           	<img ng-src="{{beer.imageUrl}}" class="face" alt="{{beer.name}}">
 
 			          <div flex="15" class="md-tile-content">
-			              <h3>{{beer.name}}</h3>
+			              <h3>{{beer.name}} 
+			              	<span class="pull-right" ng-show="user.isLoggedIn">
+				              	<md-icon ng-show="beer.ranked"
+				              		icon="/static/imgs/svg/ic_favorite_24px.svg" >
+				              	</md-icon>
+				              	<md-button ng-show="! beer.ranked" ng-click="addToRank(beer)" aria-label="Add to Favorites">
+				              		<md-icon icon="/static/imgs/svg/ic_favorite_outline_24px.svg"></md-icon>
+				              	</md-button>
+			              	</span>
+			              </h3>
 			              <h4>{{beer.brewer}} <span class="pull-right">ABV: {{beer.abv}}</span></h4>
 			              <h4>{{beer.category}} - {{beer.type}} </h4>
 
