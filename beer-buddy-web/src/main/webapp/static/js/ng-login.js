@@ -3,7 +3,7 @@ angular.module('beer-buddy-app')
 .controller('LoginController', [ '$scope', '$rootScope', '$state', '$resource',
 	function($scope, $rootScope, $state, $resource) {
 
-	var User = $resource("/user");
+	var User = $resource("/users");
 	var Login = $resource("/login");
 	
 	$rootScope.menu = $rootScope.menu || {};

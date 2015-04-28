@@ -1,11 +1,17 @@
 package com.beerbuddy.core.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="beer")
@@ -32,6 +38,10 @@ public class Beer {
     @Column(name="on_sale")
     protected boolean onSale;
     
+    @JsonIgnore
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="beer")
+    protected Set<UserBeerRank> userBeerRankings;
+
     
 	public long getId() {
 		return id;
@@ -92,6 +102,12 @@ public class Beer {
 	}
 	public void setOnSale(boolean onSale) {
 		this.onSale = onSale;
+	}
+	public Set<UserBeerRank> getUserBeerRankings() {
+		return userBeerRankings;
+	}
+	public void setUserBeerRankings(Set<UserBeerRank> userBeerRankings) {
+		this.userBeerRankings = userBeerRankings;
 	}
 	
 }

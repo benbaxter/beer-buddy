@@ -36,6 +36,11 @@ public class BeerController implements BeerMapper {
 		Sort sort = new Sort(order);
 		Pageable pageable = new PageRequest(page, size, sort);
 		return beerRepository.findAll(pageable);
+		//TODO: convert to a dto pager...
+//		List<BeerDTO> dtos = beer.getContent().stream()
+//					.map(this)
+//					.collect(Collectors.toList());
+//		return new PageImpl<BeerDTO>(dtos, beer.nextPageable(), beer.getTotalElements());
 	}
 	
 	@Description("Returns a list of all of the beers for a particular type")
@@ -54,6 +59,10 @@ public class BeerController implements BeerMapper {
 		Sort sort = new Sort(order);
 		Pageable pageable = new PageRequest(page, size, sort);
 		return beerRepository.findByType(type, pageable);
+//		List<BeerDTO> dtos = beer.getContent().stream()
+//				.map(this)
+//				.collect(Collectors.toList());
+//		return new PageImpl<BeerDTO>(dtos);
 	}
 	
 	@Description("Returns a list of all of the beers from ontario beer api")

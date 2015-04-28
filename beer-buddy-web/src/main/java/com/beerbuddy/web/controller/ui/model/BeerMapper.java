@@ -11,11 +11,15 @@ public interface BeerMapper extends Function<Beer, BeerDTO> {
 	@Override
 	public default BeerDTO apply(Beer b) {
 		BeerDTO dto = new BeerDTO();
-//		dto.setAuthor(b.getAuthor());
-//		dto.setDeweyDecimal(b.getDeweyDecimal());
-//		dto.setId(b.getId());
-//		dto.setName(b.getName());
-//		dto.setState(b.getState().getDisplay());
+		dto.setAbv(b.getAbv());
+		dto.setBrewer(b.getBrewer());
+		dto.setCategory(b.getCategory());
+		dto.setCountry(b.getCountry());
+		dto.setId(b.getId());
+		dto.setImageUrl(b.getImageUrl());
+		dto.setName(b.getName());
+		dto.setOnSale(b.isOnSale());
+		dto.setType(b.getType());
 		return dto;
 	}
 	
@@ -28,11 +32,15 @@ public interface BeerMapper extends Function<Beer, BeerDTO> {
 	
 	public default Beer mapTheOtherWay(BeerDTO dto) {
 		Beer b = new Beer();
-//		b.setAuthor(dto.getAuthor());
-//		b.setDeweyDecimal(dto.getDeweyDecimal());
-//		b.setId(dto.getId());
-//		b.setName(dto.getName());
-//		b.setState(BookState.fromDisplay(dto.getState()));
+		b.setAbv(dto.getAbv());
+		b.setBrewer(dto.getBrewer());
+		b.setCategory(dto.getCategory());
+		b.setCountry(dto.getCountry());
+		b.setId(dto.getId());
+		b.setImageUrl(dto.getImageUrl());
+		b.setName(dto.getName());
+		b.setOnSale(dto.isOnSale());
+		b.setType(dto.getType());
 		return b;
 	}
 	
