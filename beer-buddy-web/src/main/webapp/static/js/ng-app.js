@@ -1,7 +1,7 @@
 
-var app = angular.module('beer-buddy-app', ['ngMaterial', 'ui.router', 'ngResource', 'ngMessages']);
+var app = angular.module('beer-buddy-app', ['ngMaterial', 'ui.router', 'ngResource', 'ngMessages', 'slick']);
 
-app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",   
+app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",
             function($stateProvider, $urlRouterProvider, $httpProvider) {
 
 	var csrfToken = angular.element(document.querySelector("meta[name='_csrf']")).attr("content");
@@ -18,21 +18,20 @@ app.config(['$stateProvider', '$urlRouterProvider', "$httpProvider",
 	      templateUrl: "/static/partials/home.html",
 	      controller: "HomeController"
 	    })
-	    
+
 	   .state('login', {
 	      url: "/login",
 	      templateUrl: "/static/partials/login.html",
 	      controller: "LoginController"
 	    })
-	    
+
 	    .state('logout', {
 	      url: "/logout",
 	      templateUrl: "/static/partials/login.html",
 	      controller: "LogoutController"
 	    })
 	  ;
-	
+
 }])
 
 ;
-

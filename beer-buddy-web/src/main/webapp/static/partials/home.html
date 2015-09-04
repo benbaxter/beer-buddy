@@ -1,118 +1,41 @@
 
+
+<div layout="column"></div>
+
+
+
+
 <div>
-	
-	<md-content>
-		
-		<md-tabs md-selected="selectedIndex">
-		    <md-tab ng-repeat="tab in tabs" md-on-select="selectType(tab)" 
-		    		md-on-deselect="deselectType(tab)"
-		    	ng-disabled="tab.disabled" label="{{tab.title}}">
-		    <div layout="column">
-		        
-		      </div>
-		    </md-tab>
-		  </md-tabs>
-	
-	
-		<section ng-show="showBeer">
-			<!-- <md-subheader class="md-primary">Beer</md-subheader> -->
-			<md-list>
-		      <md-item ng-repeat="beer in beers">
-		        <md-item-content layout="row">
-		        	<section class="md-tile-left" flex="10">
-		        		<img ng-src="{{beer.imageUrl}}" class="face" alt="{{beer.name}}">
-		        	</section>
-			          <div flex="15" class="md-tile-content">
-			              <h3>{{beer.name}} 
-			              	<span class="pull-right" ng-show="user.isLoggedIn">
-				              	<md-icon ng-show="beer.ranked"
-				              		icon="/static/imgs/svg/ic_favorite_24px.svg" >
-				              	</md-icon>
-				              	<md-button ng-show="! beer.ranked" ng-click="addToRank(beer)" aria-label="Add to Favorites">
-				              		<md-icon icon="/static/imgs/svg/ic_favorite_outline_24px.svg"></md-icon>
-				              	</md-button>
-			              	</span>
-			              </h3>
-			              <h4>{{beer.brewer}} <span class="pull-right">ABV: {{beer.abv}}</span></h4>
-			              <h4>{{beer.category}} - {{beer.type}} </h4>
-			          </div>
-			          <div flex>
-			          <!-- 
-			            	<div>
-			            		<svg width="970">
-			            			<circle r="60" id="nytg-circle309" cx="75" cy="75" style="fill: grey; stroke-width: 1px; stroke: rgb(126, 150, 93);"></circle>
-				            		<circle r="40" id="nytg-circle309" cx="225" cy="75" style="fill: rgb(156, 175, 132); stroke-width: 1px; stroke: rgb(126, 150, 93);"></circle>
-									<circle r="25" id="nytg-circle309" cx="325" cy="75" style="fill: rgb(156, 175, 132); stroke-width: 1px; stroke: rgb(126, 150, 93);"></circle>
-									<text x="50" y="85" fill="white" font-size="40px">75</text></svg>
-			            	</div>
-			           -->
-			          </div>
-		        </md-item-content>
-		      </md-item>
-		    </md-list>
-		    <md-button ng-click="loadMore();" ng-show="hasMore();"
-			        		class="md-fab md-primary face" aria-label="Load More">
-			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
-	            </md-icon>
-			 </md-button>
+	Text Includes: <input ng-model="query"> Filter by: <select
+		ng-model="orderProp">
+
+		<option selected value="name">Alphabetical</option>
+		<option value="brewer">Brewer</option>
+		<option value="type">Type</option>
+		<option value="abv">ABV</option>
+		<option value="category">Category</option>
+	</select>
+</div>
+
+<section style="padding-top: 20px;">
+	<div class="container">
+
+		<div layout="row" ng-repeat="rows in beers" layout-margin
+			style="width: 85%; margin-left: auto; margin-right: auto;">
+			<div ng-repeat="beer in rows" flex>
+				<md-card flex flex-order="1" style="background-color: #BEE3FF;">
+				<md-card-content>
+				<h3>{{beer.name}}</h3>
+				<img ng- src="{{beer.imageUrl}}" class="face" alt="{{beer.name}}">
+				</md-card-content> </md-card>
+			</div>
+		</div>
+
+		<md-button style="position:fixed; right:0px; top:50%;" ng-click="loadMore();" ng-show="hasMore();" class="md-fab md-primary face" aria-label="Load More">
+		> </md-button>
 		</section>
-		      
-		<section ng-show="showUsersBeer">
-			<md-list>
-		      <md-item ng-repeat="rank in beers">
-		        <md-item-content layout="row">
-		        	<section class="md-tile-left" flex="10">
-		        		<img ng-src="{{rank.beer.imageUrl}}" class="face" alt="{{rank.beer.name}}">
-		        	</section>
-			          <div flex="15" class="md-tile-content">
-			              <h3>{{rank.beer.name}}</h3>
-			              <h4>{{rank.beer.brewer}} <span class="pull-right">ABV: {{rank.beer.abv}}</span></h4>
-			              <h4>{{rank.beer.category}} - {{rank.beer.type}} </h4>
-			          </div>
-		        </md-item-content>
-		      </md-item>
-		    </md-list>
-		    <md-button ng-click="loadMore();" ng-show="hasMore();"
-			        		class="md-fab md-primary face" aria-label="Load More">
-			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
-	            </md-icon>
-			 </md-button>
-		</section>
-		
-		<section ng-show="showPeople">
-			<md-list>
-		      <md-item ng-repeat="person in people">
-		        <md-item-content layout="row">
-		        	<section class="md-tile-left" flex="10">
-		        	</section>
-			          <div flex="15" class="md-tile-content">
-			              <h3>{{person.name}}</h3>
-			              <h4 ng-show="! person.beers">They have not started drinking yet...</h4>
-			              <md-list ng-show="person.beers">
-				              <h4>Top Favorite Beers</h4>
-						      <md-item ng-repeat="beer in person.beers">
-						        <md-item-content layout="row">
-						        	<section class="md-tile-left" flex="10">
-						        	</section>
-							          <div flex="15" class="md-tile-content">
-							          </div>
-						        </md-item-content>
-						      </md-item>
-						    </md-list>
-			          </div>
-		        </md-item-content>
-		      </md-item>
-		    </md-list>
-		    <md-button ng-click="loadMore();" ng-show="hasMore();"
-			        		class="md-fab md-primary face" aria-label="Load More">
-			    <md-icon icon="/static/bower_components/material-design-icons/navigation/svg/production/ic_expand_more_24px.svg" >
-	            </md-icon>
-			 </md-button>
-		</section>
-		      
-	
-	
-	</md-content>
 
 
-</div>    
+
+
+</md-content>
